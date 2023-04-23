@@ -41,7 +41,7 @@ export const AuthContextProvider = ({ children }) => {
   };
   const UpdateInfo = (data) => {
     axios
-      .post("https://cipher-91w0.onrender.com/user/profile", data, {
+      .post("https://cipher-91w0.onrender.com/update/user/profile", data, {
         withCredentials: true,
         headers,
       })
