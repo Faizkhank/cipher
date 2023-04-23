@@ -6,9 +6,11 @@ import ProfileModal from "./ProfileUpdate";
 import Default from "./Assets/default.png";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
 
 const Navbar = () => {
+  const location = useLocation();
   const [Edit, setEdit] = useState(false);
   const { user, status, setstatus } = UserAuth();
   const [img, setImageUrl] = useState(Default);
@@ -29,7 +31,7 @@ const Navbar = () => {
         headers,
       }) //
       .then((res) => {
-        if (res.data === false) {
+        if (res.data === false && location.pathname !== "/") {
           navigate("/");
         }
       })
