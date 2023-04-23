@@ -20,10 +20,13 @@ const Navbar = () => {
     "Access-Control-Allow-Origin": true,
   };
   const logout = () => {
+    localStorage.setItem("user", JSON.stringify(false));
     window.open("https://cipher-91w0.onrender.com/logout", "_self");
   };
   useEffect(() => {
-    if (!user) {
+    const users = JSON.parse(localStorage.getItem("user"));
+    console.log(users);
+    if (users === false && !user) {
       navigate("/");
     }
     if (user && user.displayProfile && user.displayProfile.data) {
@@ -32,7 +35,7 @@ const Navbar = () => {
       const url = `data:image/png;base64,${base64}`;
       setImageUrl(url);
     }
-    if (!user) navigate("/");
+
     if (status) {
       setnoti(true);
 

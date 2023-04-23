@@ -83,6 +83,7 @@ export const AuthContextProvider = ({ children }) => {
         if (res.data.user) {
           setstatus("Loged In !!");
           navigate("/profilepage/my-profile");
+          localStorage.setItem("user", JSON.stringify(true));
         }
       })
       .catch((err) => {
