@@ -3,6 +3,7 @@ import { React, useEffect, useState } from "react";
 import { Transition } from "@headlessui/react";
 import { UserAuth } from "../Context/AuthContext";
 import ProfileModal from "./ProfileUpdate";
+import { useLocation } from "react-router-dom";
 import Default from "./Assets/default.png";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -14,6 +15,7 @@ const Navbar = () => {
   const [img, setImageUrl] = useState(Default);
   const [noti, setnoti] = useState(false);
   const [log, setlog] = useState(false);
+  const location = useLocation();
   const navigate = useNavigate();
   const headers = {
     "Content-Type": "application/x-www-form-urlencoded",
@@ -23,6 +25,19 @@ const Navbar = () => {
     window.open("https://cipher-91w0.onrender.com/logout", "_self");
   };
   useEffect(() => {
+    axios
+      .get("https://cipher-91w0.onrender.com/login/success", {
+        withCredentials: true,
+        headers,
+      })
+      .then((res) => {
+        if (res.data === false && location.pathname !== "/") {
+          navigate("/");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     if (user && user.displayProfile && user.displayProfile.data) {
       const data = new Uint8Array(user.displayProfile.data.data);
       const base64 = btoa(String.fromCharCode.apply(null, data));
