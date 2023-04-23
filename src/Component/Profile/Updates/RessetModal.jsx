@@ -7,6 +7,7 @@ const Resset = (props) => {
   const [error, setError] = useState("");
   const headers = {
     "Content-Type": "application/x-www-form-urlencoded",
+    "Access-Control-Allow-Origin": true,
   };
   const handleclose = () => {
     props.state(false);
@@ -19,7 +20,7 @@ const Resset = (props) => {
     }
     axios
       .post(
-        "http://localhost:4000/check-password",
+        "https://cipher-91w0.onrender.com/check-password",
         { Password: oldPassword },
         {
           withCredentials: true,
@@ -31,7 +32,7 @@ const Resset = (props) => {
         if (data.data.success) {
           axios
             .post(
-              "http://localhost:4000/update-password",
+              "https://cipher-91w0.onrender.com/update-password",
               { Password: newPassword },
               {
                 withCredentials: true,

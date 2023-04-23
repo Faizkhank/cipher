@@ -8,6 +8,10 @@ export const AuthContextProvider = ({ children }) => {
   const [user, setuser] = useState("");
   const navigate = useNavigate();
   const [status, setstatus] = useState(false);
+  const headers = {
+    "Content-Type": "application/x-www-form-urlencoded",
+    "Access-Control-Allow-Origin": true,
+  };
   useEffect(() => {
     axios
       .get("https://cipher-91w0.onrender.com/login/success", {
@@ -21,9 +25,7 @@ export const AuthContextProvider = ({ children }) => {
         console.log(err);
       });
   }, []);
-  const headers = {
-    "Content-Type": "application/x-www-form-urlencoded",
-  };
+
   const Update = (data) => {
     axios
       .post("https://cipher-91w0.onrender.com/update/user", data, {
