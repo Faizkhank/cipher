@@ -6,11 +6,9 @@ import ProfileModal from "./ProfileUpdate";
 import Default from "./Assets/default.png";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { useLocation } from "react-router-dom";
 import axios from "axios";
 
 const Navbar = () => {
-  const location = useLocation();
   const [Edit, setEdit] = useState(false);
   const { user, status, setstatus } = UserAuth();
   const [img, setImageUrl] = useState(Default);
@@ -25,27 +23,13 @@ const Navbar = () => {
     window.open("https://cipher-91w0.onrender.com/logout", "_self");
   };
   useEffect(() => {
-    axios
-      .get("https://cipher-91w0.onrender.com/login/success", {
-        withCredentials: true,
-        headers,
-      }) //
-      .then((res) => {
-        if (res.data === false && user === "") {
-          navigate("/");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
     if (user && user.displayProfile && user.displayProfile.data) {
       const data = new Uint8Array(user.displayProfile.data.data);
       const base64 = btoa(String.fromCharCode.apply(null, data));
       const url = `data:image/png;base64,${base64}`;
       setImageUrl(url);
     }
-
+    if (!user) navigate("/");
     if (status) {
       setnoti(true);
 
