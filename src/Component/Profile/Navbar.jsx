@@ -304,15 +304,15 @@ const Navbar = () => {
             <div className="pl-5 overflow-hidden">
               <p className=" font-normal text-xl m-auto">Hello,</p>
               <p className=" font-bold text-2xl m-auto">
-                {user.FirstName + " " + user.LastName}
+                {user?.FirstName + " " + user?.LastName}
               </p>
-              <p className=" font-normal text-md m-auto">{user.Email}</p>
+              <p className=" font-normal text-md m-auto">{user?.Email}</p>
             </div>
           </div>
         </div>
         <div className="w-[190px] h-full flex">
           <p className="font-normal text-lg mt-[35px] pr-5">
-            {user.followerscount}
+            {user?.followerscount}
           </p>
           <Link to="/follower">
             <p className=" font-semibold text-lg mt-[35px] pr-5">Followers</p>
