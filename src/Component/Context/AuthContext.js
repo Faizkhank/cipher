@@ -8,7 +8,19 @@ export const AuthContextProvider = ({ children }) => {
   const [user, setuser] = useState("");
   const navigate = useNavigate();
   const [status, setstatus] = useState(false);
-
+  useEffect(() => {
+    axios
+      .get("http://localhost:4000/login/success", {
+        withCredentials: true,
+        headers,
+      })
+      .then((res) => {
+        setuser(res.data.user);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   const headers = {
     "Content-Type": "application/x-www-form-urlencoded",
   };
@@ -33,6 +45,7 @@ export const AuthContextProvider = ({ children }) => {
       })
       .then((res) => {
         if (res) {
+          console.log(res);
           setstatus("Updated");
         }
       })
@@ -40,19 +53,7 @@ export const AuthContextProvider = ({ children }) => {
         console.log(err);
       });
   };
-  useEffect(() => {
-    axios
-      .get("http://localhost:4000/login/success", {
-        withCredentials: true,
-        headers,
-      })
-      .then((res) => {
-        setuser(res.data.user);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [user]);
+
   const success = () => {
     axios
       .get("http://localhost:4000/login/success", {
@@ -77,12 +78,11 @@ export const AuthContextProvider = ({ children }) => {
         if (res.data.user) {
           setstatus("Loged In !!");
           navigate("/profilepage/my-profile");
-        } else {
-          setstatus("Wrong email or password");
         }
       })
       .catch((err) => {
         console.log(err);
+        setstatus("You Dont Have Account!");
       });
   };
   const Register = async (data) => {

@@ -1,22 +1,14 @@
-import { useState } from "react";
-import axios from "axios";
+import { useEffect, useState } from "react";
+import { UserAuth } from "../../Context/AuthContext";
+
 const Professional = () => {
+  const { UpdateInfo, user } = UserAuth();
   const [edit, setEdit] = useState(false);
   const [education, setEducation] = useState("");
   const [current, setcurrent] = useState("");
-
   const handleUpload = () => {
-    const data = new FormData();
-    data.append("education", education);
-    data.append("current", current);
-    axios
-      .post("http://example.com/upload", data)
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    const data = { education: education, current: current };
+    UpdateInfo(data);
   };
 
   return (
@@ -36,6 +28,7 @@ const Professional = () => {
           <button
             onClick={() => {
               setEdit(!edit);
+              handleUpload();
             }}
             className=" bg-orange-400 px-6 py-0 h-[28px]  rounded-lg text-white"
           >
@@ -57,9 +50,15 @@ const Professional = () => {
               !edit ? "pointer-events-none" : ""
             } border-white text-black text-md font-semibold rounded-lg focus:ring-white focus:border-white block w-full p-2.5`}
           >
-            <option value="" disabled selected hidden>
-              Graduation
-            </option>
+            {user && user.Details && user.Details.education !== "" ? (
+              <option value="" disabled selected hidden>
+                {user.Details.education}
+              </option>
+            ) : (
+              <option value="" disabled selected hidden>
+                Graduation
+              </option>
+            )}
             <option value="Primary">Primary</option>
             <option value="Secondary">Secondary</option>
             <option value="Higher Secondary">Higher Secondary</option>
@@ -80,6 +79,15 @@ const Professional = () => {
               !edit ? "pointer-events-none" : ""
             } border-white text-black text-md font-semibold rounded-lg focus:ring-white focus:border-white block w-full p-2.5`}
           >
+            {user && user.Details && user.Details.current !== "" ? (
+              <option value="" disabled selected hidden>
+                {user.Details.current}
+              </option>
+            ) : (
+              <option value="" disabled selected hidden>
+                College Student
+              </option>
+            )}
             <option value="College Student">College Student</option>
             <option value="Schooling">Schooling</option>
             <option value="Teaching">Teaching</option>

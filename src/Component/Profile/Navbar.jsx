@@ -4,6 +4,7 @@ import { Transition } from "@headlessui/react";
 import { UserAuth } from "../Context/AuthContext";
 import ProfileModal from "./ProfileUpdate";
 import Default from "./Assets/default.png";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
@@ -11,7 +12,12 @@ const Navbar = () => {
   const { user, status, setstatus } = UserAuth();
   const [img, setImageUrl] = useState(Default);
   const [noti, setnoti] = useState(false);
+  const [log, setlog] = useState(false);
+  const navigate = useNavigate();
 
+  const logout = () => {
+    window.open("http://localhost:4000/logout", "_self");
+  };
   useEffect(() => {
     if (user && user.displayProfile && user.displayProfile.data) {
       const data = new Uint8Array(user.displayProfile.data.data);
@@ -19,6 +25,7 @@ const Navbar = () => {
       const url = `data:image/png;base64,${base64}`;
       setImageUrl(url);
     }
+    if (!user) navigate("/");
     if (status) {
       setnoti(true);
 
@@ -67,11 +74,12 @@ const Navbar = () => {
         </div>
       </Transition>
       {Edit ? <ProfileModal state={setEdit} user={user} img={img} /> : null}
-      {drop ? (
+      {drop || log ? (
         <div
-          className="h-full w-full absolute -z-30"
+          className="h-screen w-full absolute z-20 bg-transparent"
           onClick={() => {
             setdrop(false);
+            setlog(false);
           }}
         ></div>
       ) : null}
@@ -103,7 +111,7 @@ const Navbar = () => {
               <span className=" font-semibold text-[22px] font-sans align-middle">
                 CipherSchools
               </span>
-            </div>{" "}
+            </div>
           </Link>
           <div
             className="flex w-[140px] mt-4 ml-6 cursor-pointer"
@@ -223,11 +231,29 @@ const Navbar = () => {
             </div>
             <div className="flex w-[50px] ml-6">
               <img
-                className=" w-[30px] h-[30px] rounded-full"
+                onClick={(e) => {
+                  setlog(!log);
+                }}
+                className=" w-[30px] h-[30px] rounded-full hover:scale-110 duration-200"
                 src={img}
                 alt="user"
               />
+              <div
+                className={`fixed w-[80px] h-[50px] top-11 bg-white shadow-xl duration-0 z-30 rounded-lg ${
+                  !log ? "hidden" : "  "
+                }`}
+              >
+                <p
+                  onClick={(e) => {
+                    logout();
+                  }}
+                  className=" font-semibold text-center cursor-pointer hover:bg-slate-200 py-3 rounded-lg"
+                >
+                  Logout
+                </p>
+              </div>
             </div>
+
             <div className="w-[90px] flex">
               <img
                 className="w-[20px] mt-[5px]"

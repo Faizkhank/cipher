@@ -55,7 +55,9 @@ const Login = () => {
             </span>
           </div>
           {status ? (
-            <p className=" text-red-600 font-semibold text-lg">{status}</p>
+            <div className="flex justify-center">
+              <p className=" text-red-600 font-normal text-lg">{status}</p>
+            </div>
           ) : null}
           <div className=" flex justify-center mt-8">
             <form className="w-4/5">
@@ -65,7 +67,7 @@ const Login = () => {
                     <input
                       type="text"
                       placeholder="Email ID"
-                      className="w-full px-8  h-[50px] border-slate-400 border-2 rounded-xl mb-4 focus:outline-gray-500"
+                      className="w-full px-8  h-[50px] border-white bg-slate-200 rounded-xl mb-4 focus:outline-none"
                       name="Email"
                       onChange={(e) => {
                         setemail(e.target.value);
@@ -76,7 +78,7 @@ const Login = () => {
                     <input
                       type="text"
                       placeholder="Password"
-                      className="w-full px-8  h-[50px] rounded-xl mb-4 border-slate-400 border-2 focus:outline-gray-500"
+                      className="w-full px-8  h-[50px] rounded-xl mb-4 border-white bg-slate-200  focus:outline-none"
                       name="password"
                       onChange={(e) => {
                         setpassword(e.target.value);

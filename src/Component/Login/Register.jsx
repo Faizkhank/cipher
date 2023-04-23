@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { UserAuth } from "../Context/AuthContext";
 
 const Register = () => {
-  const { Register } = UserAuth();
+  const { Register, status } = UserAuth();
   const [Data, setData] = useState({
     firstName: "",
     lastName: "",
@@ -27,7 +27,7 @@ const Register = () => {
           <input
             type="text"
             placeholder="First name"
-            className="w-full px-3  h-[50px] border-slate-400 border-2 rounded-xl mb-4 focus:outline-gray-500"
+            className="w-full px-3  h-[50px] border-white bg-slate-200  rounded-xl mb-4 focus:outline-none"
             name="first_name"
             onChange={(e) => handleInputChange(e)}
           />
@@ -36,7 +36,7 @@ const Register = () => {
           <input
             type="text"
             placeholder="Last name"
-            className="w-full px-3  h-[50px] rounded-xl mb-4 border-slate-400 border-2 focus:outline-gray-500"
+            className="w-full px-3  h-[50px] rounded-xl mb-4 border-white bg-slate-200   focus:outline-none"
             name="last_name"
             onChange={(e) => handleInputChange(e)}
           />
@@ -45,7 +45,7 @@ const Register = () => {
       <input
         type="text"
         placeholder="Email"
-        className="w-full px-3 mt-2 h-[50px] rounded-xl mb-2 border-slate-400 border-2 focus:outline-gray-500"
+        className="w-full px-3 mt-2 h-[50px] rounded-xl mb-2 border-white bg-slate-200   focus:outline-none"
         name="email"
         onChange={(e) => handleInputChange(e)}
       />
@@ -53,7 +53,7 @@ const Register = () => {
         <input
           type="text"
           placeholder="Phone(Optional)"
-          className="w-2/5 px-3 mr-2  h-[50px] rounded-xl mb-4 border-slate-400 border-2 focus:outline-gray-500"
+          className="w-2/5 px-3 mr-2  h-[50px] rounded-xl mb-4 border-white bg-slate-200   focus:outline-none"
           name="phone"
           maxLength="10"
           onChange={(e) => handleInputChange(e)}
@@ -61,7 +61,7 @@ const Register = () => {
         <input
           type="text"
           placeholder="Password"
-          className="w-full px-3  h-[50px] rounded-xl mb-4 border-slate-400 border-2 focus:outline-gray-500"
+          className="w-full px-3  h-[50px] rounded-xl mb-4 border-white bg-slate-200   focus:outline-none"
           name="password"
           onChange={(e) => handleInputChange(e)}
         />
