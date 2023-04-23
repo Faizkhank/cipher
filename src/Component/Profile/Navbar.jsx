@@ -19,6 +19,20 @@ const Navbar = () => {
     window.open("https://cipher-91w0.onrender.com/logout", "_self");
   };
   useEffect(() => {
+    axios
+      .get("https://cipher-91w0.onrender.com/login/success", {
+        withCredentials: true,
+        headers,
+      })
+      .then((res) => {
+        if (!res.data.user) {
+          navigate("/");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
     if (user && user.displayProfile && user.displayProfile.data) {
       const data = new Uint8Array(user.displayProfile.data.data);
       const base64 = btoa(String.fromCharCode.apply(null, data));
