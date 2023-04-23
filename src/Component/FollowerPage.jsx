@@ -16,7 +16,7 @@ const FollowerPage = () => {
       return;
     }
     axios
-      .get(`http://localhost:4000/users/${user.id}/followers`, {
+      .get(`https://cipher-91w0.onrender.com/users/${user.id}/followers`, {
         withCredentials: true,
         headers,
       })

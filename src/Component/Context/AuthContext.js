@@ -10,7 +10,7 @@ export const AuthContextProvider = ({ children }) => {
   const [status, setstatus] = useState(false);
   useEffect(() => {
     axios
-      .get("http://localhost:4000/login/success", {
+      .get("https://cipher-91w0.onrender.com/login/success", {
         withCredentials: true,
         headers,
       })
@@ -26,7 +26,7 @@ export const AuthContextProvider = ({ children }) => {
   };
   const Update = (data) => {
     axios
-      .post("http://localhost:4000/update/user", data, {
+      .post("https://cipher-91w0.onrender.com/update/user", data, {
         withCredentials: true,
         headers,
       })
@@ -39,7 +39,7 @@ export const AuthContextProvider = ({ children }) => {
   };
   const UpdateInfo = (data) => {
     axios
-      .post("http://localhost:4000/update/user/profile", data, {
+      .post("https://cipher-91w0.onrender.com/user/profile", data, {
         withCredentials: true,
         headers,
       })
@@ -56,7 +56,7 @@ export const AuthContextProvider = ({ children }) => {
 
   const success = () => {
     axios
-      .get("http://localhost:4000/login/success", {
+      .get("https://cipher-91w0.onrender.com/login/success", {
         withCredentials: true,
         headers,
       })
@@ -69,7 +69,7 @@ export const AuthContextProvider = ({ children }) => {
   };
   const Login = async (data) => {
     axios
-      .post("http://localhost:4000/user/login", qs.stringify(data), {
+      .post("https://cipher-91w0.onrender.com/user/login", qs.stringify(data), {
         withCredentials: true,
         headers,
       })
@@ -87,7 +87,7 @@ export const AuthContextProvider = ({ children }) => {
   };
   const Register = async (data) => {
     axios
-      .post("http://localhost:4000/register", qs.stringify(data), {
+      .post("https://cipher-91w0.onrender.com/register", qs.stringify(data), {
         withCredentials: true,
         headers,
       })

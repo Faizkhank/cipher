@@ -16,7 +16,7 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const logout = () => {
-    window.open("http://localhost:4000/logout", "_self");
+    window.open("https://cipher-91w0.onrender.com/logout", "_self");
   };
   useEffect(() => {
     if (user && user.displayProfile && user.displayProfile.data) {
