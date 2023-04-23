@@ -31,7 +31,7 @@ const Navbar = () => {
         headers,
       })
       .then((res) => {
-        if (res.data === false && location.pathname !== "/") {
+        if (res.data === false || location.pathname !== "/") {
           navigate("/");
         }
       })
