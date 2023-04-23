@@ -6,6 +6,7 @@ import ProfileModal from "./ProfileUpdate";
 import Default from "./Assets/default.png";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Navbar = () => {
   const [Edit, setEdit] = useState(false);
@@ -14,7 +15,10 @@ const Navbar = () => {
   const [noti, setnoti] = useState(false);
   const [log, setlog] = useState(false);
   const navigate = useNavigate();
-
+  const headers = {
+    "Content-Type": "application/x-www-form-urlencoded",
+    "Access-Control-Allow-Origin": true,
+  };
   const logout = () => {
     window.open("https://cipher-91w0.onrender.com/logout", "_self");
   };
