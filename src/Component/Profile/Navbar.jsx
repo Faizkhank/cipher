@@ -29,7 +29,7 @@ const Navbar = () => {
         headers,
       }) //
       .then((res) => {
-        if (!res.data.user) {
+        if (res.data === false) {
           navigate("/");
         }
       })
