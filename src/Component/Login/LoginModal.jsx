@@ -76,8 +76,8 @@ const Login = () => {
                   </label>
                   <label className=" w-4/5 h-[50px] rounded-xl">
                     <input
-                      type="text"
                       placeholder="Password"
+                      type="password"
                       className="w-full px-8  h-[50px] rounded-xl mb-4 border-white bg-slate-200  focus:outline-none"
                       name="password"
                       onChange={(e) => {

@@ -93,6 +93,7 @@ const Resset = (props) => {
                   <input
                     placeholder="Old Password"
                     name="OldPassword"
+                    type="password"
                     className="w-full rounded-lg focus:outline-none bg-slate-200 border-white py-2 px-3"
                     onChange={(e) => {
                       setOldPassword(e.target.value);
@@ -104,6 +105,7 @@ const Resset = (props) => {
                   <input
                     placeholder="New Password"
                     name="NewPassword"
+                    type="password"
                     className="w-full rounded-lg focus:outline-none bg-slate-200 border-white py-2 px-3"
                     onChange={(e) => {
                       setNewPassword(e.target.value);
@@ -115,6 +117,7 @@ const Resset = (props) => {
                   <input
                     placeholder="Rewrite Password"
                     name="Password"
+                    type="password"
                     onChange={(e) => setConfirmNewPassword(e.target.value)}
                     className="w-full rounded-lg  focus:outline-none bg-slate-200 border-white py-2 px-3"
                   />

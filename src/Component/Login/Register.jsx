@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { UserAuth } from "../Context/AuthContext";
 
 const Register = () => {
-  const { Register, status } = UserAuth();
+  const { Register } = UserAuth();
   const [Data, setData] = useState({
     firstName: "",
     lastName: "",
@@ -59,7 +59,7 @@ const Register = () => {
           onChange={(e) => handleInputChange(e)}
         />
         <input
-          type="text"
+          type="password"
           placeholder="Password"
           className="w-full px-3  h-[50px] rounded-xl mb-4 border-white bg-slate-200   focus:outline-none"
           name="password"
