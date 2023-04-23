@@ -23,7 +23,7 @@ const Navbar = () => {
       .get("https://cipher-91w0.onrender.com/login/success", {
         withCredentials: true,
         headers,
-      })
+      }) //
       .then((res) => {
         if (!res.data.user) {
           navigate("/");
