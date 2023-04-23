@@ -25,7 +25,7 @@ const Navbar = () => {
       const url = `data:image/png;base64,${base64}`;
       setImageUrl(url);
     }
-    if (!user) navigate("/");
+
     if (status) {
       setnoti(true);
 

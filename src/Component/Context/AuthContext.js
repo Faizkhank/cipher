@@ -64,6 +64,9 @@ export const AuthContextProvider = ({ children }) => {
       })
       .then((res) => {
         setuser(res.data.user);
+        if (!res.data.user) {
+          navigate("/");
+        }
       })
       .catch((err) => {
         console.log(err);
