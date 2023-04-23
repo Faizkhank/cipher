@@ -19,20 +19,22 @@ export const AuthContextProvider = ({ children }) => {
         headers,
       })
       .then((res) => {
-        if (res.data === "done") setstatus("Updated");
+        if (res) setstatus("Updated");
       })
       .catch((err) => {
         console.log(err);
       });
   };
-  const UpdateInfo = (data, field) => {
+  const UpdateInfo = (data) => {
     axios
       .post("http://localhost:4000/update/user/profile", data, {
         withCredentials: true,
         headers,
       })
       .then((res) => {
-        if (res.data === "done") setstatus("Updated");
+        if (res) {
+          setstatus("Updated");
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -50,7 +52,7 @@ export const AuthContextProvider = ({ children }) => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [user]);
   const success = () => {
     axios
       .get("http://localhost:4000/login/success", {
@@ -73,7 +75,10 @@ export const AuthContextProvider = ({ children }) => {
       .then((res) => {
         setuser(res.data.user);
         if (res.data.user) {
+          setstatus("Loged In !!");
           navigate("/profilepage/my-profile");
+        } else {
+          setstatus("Wrong email or password");
         }
       })
       .catch((err) => {

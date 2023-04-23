@@ -2,7 +2,7 @@ import { useState } from "react";
 import Resset from "./RessetModal";
 const Password = () => {
   const [edit, setEdit] = useState(false);
-  console.log(edit);
+
   return (
     <div>
       {edit ? <Resset state={setEdit} /> : null}

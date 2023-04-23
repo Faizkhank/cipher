@@ -1,6 +1,24 @@
 import { useState } from "react";
+import axios from "axios";
 const Professional = () => {
   const [edit, setEdit] = useState(false);
+  const [education, setEducation] = useState("");
+  const [current, setcurrent] = useState("");
+
+  const handleUpload = () => {
+    const data = new FormData();
+    data.append("education", education);
+    data.append("current", current);
+    axios
+      .post("http://example.com/upload", data)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   return (
     <div>
       <div className="p-3 flex justify-between">
@@ -32,6 +50,9 @@ const Professional = () => {
           </label>
           <select
             id="education"
+            onChange={(e) => {
+              setEducation(e.target.value);
+            }}
             className={`bg-gray-50 px-3 ${
               !edit ? "pointer-events-none" : ""
             } border-white text-black text-md font-semibold rounded-lg focus:ring-white focus:border-white block w-full p-2.5`}
@@ -51,6 +72,9 @@ const Professional = () => {
             What do you do currently?
           </label>
           <select
+            onChange={(e) => {
+              setcurrent(e.target.value);
+            }}
             id="education"
             className={`bg-gray-50 px-3 ${
               !edit ? "pointer-events-none" : ""

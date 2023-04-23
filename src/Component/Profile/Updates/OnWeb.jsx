@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { UserAuth } from "../../Context/AuthContext";
 
 const Onweb = () => {
-  const { UpdateInfo } = UserAuth();
+  const { UpdateInfo, user } = UserAuth();
+
   const [edit, setEdit] = useState(false);
   const [Data, setData] = useState({});
   const handleInputChange = (event) => {
@@ -50,6 +51,9 @@ const Onweb = () => {
           <input
             placeholder="Linkedin"
             name="linkedin"
+            defaultValue={`${
+              user && user.Details ? user.Details.linkedin : ""
+            }`}
             className={`w-full rounded-lg py-2 px-3 ${
               !edit ? "pointer-events-none" : ""
             }`}
@@ -63,6 +67,7 @@ const Onweb = () => {
           <input
             placeholder="Github"
             name="github"
+            defaultValue={`${user && user.Details ? user.Details.github : ""}`}
             className={`w-full rounded-lg py-2 px-3 ${
               !edit ? "pointer-events-none" : ""
             }`}
@@ -76,6 +81,9 @@ const Onweb = () => {
           <input
             placeholder="Facebook"
             name="facebook"
+            defaultValue={`${
+              user && user.Details ? user.Details.facebook : ""
+            }`}
             className={`w-full rounded-lg py-2 px-3 ${
               !edit ? "pointer-events-none" : ""
             }`}
@@ -89,6 +97,7 @@ const Onweb = () => {
           <input
             placeholder="Twitter"
             name="twitter"
+            defaultValue={`${user && user.Details ? user.Details.twitter : ""}`}
             className={`w-full rounded-lg py-2 px-3 ${
               !edit ? "pointer-events-none" : ""
             }`}
@@ -102,6 +111,9 @@ const Onweb = () => {
           <input
             placeholder="Instagram"
             name="instagram"
+            defaultValue={`${
+              user && user.Details ? user.Details.instagram : ""
+            }`}
             className={`w-full rounded-lg py-2 px-3 ${
               !edit ? "pointer-events-none" : ""
             }`}
@@ -115,6 +127,7 @@ const Onweb = () => {
           <input
             placeholder="Website"
             name="website"
+            defaultValue={`${user && user.Details ? user.Details.website : ""}`}
             className={`w-full rounded-lg py-2 px-3 ${
               !edit ? "pointer-events-none" : ""
             }`}

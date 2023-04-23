@@ -3,7 +3,7 @@ import "../Profile/style.css";
 import { UserAuth } from "../Context/AuthContext";
 
 const ProfileModal = (props) => {
-  const { Update } = UserAuth();
+  const { Update, status } = UserAuth();
   const [preview, setpreview] = useState("");
   const [profileImage, setProfileImage] = useState(null);
   const [Data, setData] = useState({});

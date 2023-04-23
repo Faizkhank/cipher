@@ -4,11 +4,13 @@ import { Transition } from "@headlessui/react";
 import { UserAuth } from "../Context/AuthContext";
 import ProfileModal from "./ProfileUpdate";
 import Default from "./Assets/default.png";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [Edit, setEdit] = useState(false);
-  const { user, success } = UserAuth();
+  const { user, status, setstatus } = UserAuth();
   const [img, setImageUrl] = useState(Default);
+  const [noti, setnoti] = useState(false);
 
   useEffect(() => {
     if (user && user.displayProfile && user.displayProfile.data) {
@@ -17,11 +19,53 @@ const Navbar = () => {
       const url = `data:image/png;base64,${base64}`;
       setImageUrl(url);
     }
-  }, [user]);
+    if (status) {
+      setnoti(true);
+
+      setTimeout(() => {
+        setnoti(false);
+        setstatus("");
+      }, 3000);
+    }
+  }, [user, status]);
 
   const [drop, setdrop] = useState(false);
   return (
     <div className="w-full fixed z-0">
+      <Transition
+        as="div"
+        show={noti}
+        enter="transition-all duration-200"
+        enterFrom="transform opacity-20 translate-x-full "
+        enterTo="transform opacity-100 translate-x-0"
+        leave="transition-opacity duration-200"
+        leaveFrom="opacity-100 translate-x-full"
+        leaveTo="opacity-0 translate-x-0"
+        className=" fixed z-50 right-0 top-16"
+      >
+        <div
+          class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md"
+          role="alert"
+        >
+          <div class="flex">
+            <div class="py-1">
+              <svg
+                class="fill-current h-6 w-6 text-teal-500 mr-4"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+              >
+                <path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
+              </svg>
+            </div>
+            <div>
+              <p class="font-bold">{status}</p>
+              <p class="text-sm">
+                Make sure you know how these changes affect you.
+              </p>
+            </div>
+          </div>
+        </div>
+      </Transition>
       {Edit ? <ProfileModal state={setEdit} user={user} img={img} /> : null}
       {drop ? (
         <div
@@ -33,31 +77,34 @@ const Navbar = () => {
       ) : null}
       <div className="navbar w-full flex h-[60px] bg-white border-b pb-5 justify-between">
         <div className="flex">
-          <div className="flex space-x-2 mt-3 ml-4">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-7 h-7 mr-2 mt-1 ml-2 "
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M3.75 6.75h16.5M3.75 12H12m-8.25 5.25h16.5"
-              />
-            </svg>
+          <Link to="/profilepage/my-profile">
+            <div className="flex space-x-2 mt-3 ml-4">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-7 h-7 mr-2 mt-1 ml-2 "
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M3.75 6.75h16.5M3.75 12H12m-8.25 5.25h16.5"
+                />
+              </svg>
 
-            <img
-              src="https://www.cipherschools.com/static/media/Cipherschools_icon@2x.3b571d743ffedc84d039.png"
-              alt="user"
-              className="w-9 h-9"
-            />
-            <span className=" font-semibold text-[22px] font-sans align-middle">
-              CipherSchools
-            </span>
-          </div>
+              <img
+                src="https://www.cipherschools.com/static/media/Cipherschools_icon@2x.3b571d743ffedc84d039.png"
+                alt="user"
+                className="w-9 h-9"
+              />
+
+              <span className=" font-semibold text-[22px] font-sans align-middle">
+                CipherSchools
+              </span>
+            </div>{" "}
+          </Link>
           <div
             className="flex w-[140px] mt-4 ml-6 cursor-pointer"
             onClick={() => setdrop(!drop)}
@@ -234,8 +281,12 @@ const Navbar = () => {
           </div>
         </div>
         <div className="w-[190px] h-full flex">
-          <p className="font-normal text-xl mt-[35px] pr-5">0</p>
-          <p className=" font-normal text-lg mt-[35px] pr-5">Followers</p>
+          <p className="font-normal text-lg mt-[35px] pr-5">
+            {user.followerscount}
+          </p>
+          <Link to="/follower">
+            <p className=" font-semibold text-lg mt-[35px] pr-5">Followers</p>
+          </Link>
         </div>
       </div>
     </div>

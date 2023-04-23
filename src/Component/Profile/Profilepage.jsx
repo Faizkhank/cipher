@@ -1,17 +1,23 @@
 import { React, useState } from "react";
 import Contribution from "./Contribution/Contribution";
-import Navbar from "./Navbar";
+
 import { UserAuth } from "../Context/AuthContext";
 import Professional from "./Updates/Professional";
 import Password from "./Updates/Password";
 import Onweb from "./Updates/OnWeb";
 
 const Profilepage = () => {
+  const { UpdateInfo, user } = UserAuth();
   const [edit, setEdit] = useState(false);
+  const [textarea, settext] = useState("");
+
+  const handleFormSubmit = () => {
+    const data = { About_Me: textarea };
+    UpdateInfo(data);
+  };
+
   return (
     <div>
-      <Navbar />
-
       <div className="pt-[160px]">
         <div className="w-full h-full bg-slate-100">
           <div className="h-[250px] w-full bg-slate-100 px-16 py-3">
@@ -30,6 +36,7 @@ const Profilepage = () => {
                 <button
                   onClick={() => {
                     setEdit(!edit);
+                    handleFormSubmit();
                   }}
                   className=" bg-orange-400 px-6 py-0 h-[28px]  rounded-lg text-white"
                 >
@@ -38,6 +45,10 @@ const Profilepage = () => {
               )}
             </div>
             <textarea
+              onChange={(e) => settext(e.target.value)}
+              defaultValue={`${
+                user && user.Details ? user.Details.About_Me : ""
+              }`}
               className={`bg-white resize-none ${
                 !edit ? "pointer-events-none" : ""
               } focus:border-white focus:outline-none rounded-lg p-4 text-black text-md w-full h-[150px] border-none`}
