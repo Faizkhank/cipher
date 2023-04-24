@@ -6,16 +6,29 @@ import { UserAuth } from "../Context/AuthContext";
 const Login = () => {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
-  const { Login, status } = UserAuth();
+  const { Login, status, setstatus } = UserAuth();
   const [showRegister, setRegister] = useState(false);
   const handlelogin = (e) => {
     e.preventDefault();
     const data = { email: email, password: password };
+    setstatus("logging");
     Login(data);
   };
 
   return (
     <div className="color w-full">
+      {status === "logging" ? (
+        <div className=" fixed z-40 w-full h-full top-0 left-0 right-0 bottom-0">
+          <div className=" bg-black opacity-75 w-full h-full"></div>
+          <div className="fixed z-50 top-0 left-0 right-0 bottom-0 ">
+            <img
+              src="https://www.cipherschools.com/static/media/Cipherschools_icon@2x.3b571d743ffedc84d039.png"
+              className="w-[250px] h-[250px] m-auto mt-[35vh] animate-spin"
+              alt="spin"
+            />
+          </div>
+        </div>
+      ) : null}
       <div className="flex h-screen bg-slate-200">
         <div className="login m-auto w-2/5 h-auto shadow-2xl rounded-3xl bg-white">
           <div className="header flex justify-between w-full px-4 py-5">
