@@ -15,17 +15,13 @@ const Navbar = () => {
   const [noti, setnoti] = useState(false);
   const [log, setlog] = useState(false);
   const navigate = useNavigate();
-  const headers = {
-    "Content-Type": "application/x-www-form-urlencoded",
-    "Access-Control-Allow-Origin": true,
-  };
+
   const logout = () => {
     localStorage.setItem("user", JSON.stringify(false));
     window.open("https://cipher-91w0.onrender.com/logout", "_self");
   };
   useEffect(() => {
     const users = JSON.parse(localStorage.getItem("user"));
-    console.log(users);
     if (users === false && !user) {
       navigate("/");
     }

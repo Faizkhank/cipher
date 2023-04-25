@@ -1,23 +1,24 @@
-import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Register from "./Register";
 import { UserAuth } from "../Context/AuthContext";
 
 const Login = () => {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
-  const { Login, status, setstatus } = UserAuth();
+  const { Login, status } = UserAuth();
+  const [processing, setprocessing] = useState(false);
   const [showRegister, setRegister] = useState(false);
-  const handlelogin = (e) => {
+  const handlelogin = async (e) => {
     e.preventDefault();
     const data = { email: email, password: password };
-    setstatus("logging");
-    Login(data);
+    setprocessing(true);
+    const res = await Login(data);
+    if (res) setprocessing(false);
   };
 
   return (
     <div className="color w-full">
-      {status === "logging" ? (
+      {processing ? (
         <div className=" fixed z-40 w-full h-full top-0 left-0 right-0 bottom-0">
           <div className=" bg-black opacity-75 w-full h-full"></div>
           <div className="fixed z-50 top-0 left-0 right-0 bottom-0 ">
